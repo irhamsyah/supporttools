@@ -74,21 +74,22 @@
                             Action <span class="caret"></span>
                           </a>
                           <div class="dropdown-menu">
-                          <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-edit-kdo"
+                          <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-update-pku"
                               data-id={{ $value->id }}
+                              data-pic_id={{ $value->pkuuser->id }}
                               data-nama={{ $value->pkuuser->nama }}
                               data-maya_mkr_target={{ $value->mba_maya_mekaar_target }}
                               data-maya_mkr_realisasi={{ $value->mba_maya_mekaar_realisasi }}
-                              data-maya_ulm_target={{{$value->mba_maya_ulamm_target}}}
+                              data-maya_ulm_target={{$value->mba_maya_ulamm_target}}
                               data-maya_ulm_realisasi={{ $value->mba_maya_ulamm_realisasi }}
                               data-wulan_target={{ $value->kak_wulan_mekaar_target }}
                               data-wulan_realisasi={{ $value->kak_wulan_mekaar_realisasi }}
                               data-pameran_target={{ $value->pameran_target}}
                               data-pameran_realisasi={{ $value->pameran_realisasi}}
                               >
-                                Edit
+                                Update
                             </a>
-                            <form action="/bo_del_pkudata" method="post" style="margin-bottom: 0;" onclick="return confirm('Apakah anda yakin akan menghapus perkiraan ini?')">
+                            <form action="/bo_pk_del_pkudata" method="post" style="margin-bottom: 0;" onclick="return confirm('Apakah anda yakin akan menghapus perkiraan ini?')">
                               <button type="submit" tabindex="-1" class="dropdown-item">
                                 Delete
                               </button>
@@ -111,6 +112,82 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
+  </div>
+  {{-- MODAL EDIT KDO --}}
+  <div class="modal fade" id="modal-update-pku">
+    <div class="modal-dialog modal-xl">
+      <form action="/bo_pk_de_updatepku" method="post" enctype="multipart/form-data">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Update Data PKU</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!--Baris ke 1 ADD tabungan ----->
+            <div class="form-group">
+              <div class="row">
+                <input type="text" hidden name="id">
+                <div class="col-lg-3 col-sm-6">
+                  <label for="nasabahid">Nama PIC</label>
+                  <select class="form-control" name="pic_id">
+                    <option id="idpic" selected></option>
+                    @foreach($pkuser as $value)
+                        <option value="{{$value->id}}">{{$value->nama}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                  <label for="nasabahid">Mba Maya Mekaar Target</label>
+                    <input type="number" id="addkdunit" name="mba_maya_mekaar_target" class="form-control" value=0>
+                </div>
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputnocif">Mba Maya Mekaar Realisasi</label>
+                  <input type="number" id="addnmunit" name="mba_maya_mekaar_realisasi"  class="form-control" value=0>
+                </div>
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputnocif">Mba Maya ULaMM Target</label>
+                  <input type="number" id="editalamatnasabah" name="mba_maya_ulamm_target" class="form-control" value=0>
+                </div>
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputnocif">Mba Maya ULaMM Realisasi</label>
+                  <input type="number" id="editalamatnasabah" name="mba_maya_ulamm_realisasi" class="form-control" value=0>
+                </div>
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputnocif">Kak Wulan Mekaar Target</label>
+                  <input type="number" id="editalamatnasabah" name="kak_wulan_mekaar_target" class="form-control" value=0>
+                </div>
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputnocif">Kak Wulan Mekaar Realisasi</label>
+                  <input type="number" id="editalamatnasabah" name="kak_wulan_mekaar_realisasi" class="form-control" value=0>
+                </div>
+
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputtipe">Pameran Target</label>
+                  <input type="number" name="pameran_target" class="form-control" value=0>
+                </div>
+                <div class="col-lg-2 col-sm-8">
+                  <label for="inputnocif">Pameran Realisasi</label>
+                  <input type="number" name="pameran_realisasi" class="form-control" value=0>
+                </div>
+              </div>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+    
+            </div>
+            <!--Baris ke 2 EDIT tabungan ----->
+          </div>
+        <!-- /.modal-content -->
+      @csrf
+      </form>
+      </div>
+
+    </div>
+    <!-- /.modal-dialog -->
   </div>
     {{-- MODAL ADD KDO --}}
     <div class="modal fade" id="modal-add-datapku">
@@ -187,8 +264,6 @@
       </div>
       <!-- /.modal-dialog -->
     </div>   
-  
-  {{-- BATAS ADD PKU --}}
 </div>
 <!-- /.content -->
 @endsection

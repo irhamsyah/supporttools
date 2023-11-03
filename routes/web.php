@@ -58,3 +58,7 @@ Route::delete('bo_del_kdo','InventoryController@bo_kd_de_delkdo');
 Route::get('bo_kd_de_showformentrypku','PkuController@bo_kd_de_showformentrypku')->name('showformentrypku');
 // add data PKU
 Route::post('bo_pk_de_addpku','PkuController@bo_pk_de_addpku');
+// Update PKU
+Route::post('bo_pk_de_updatepku','PkuController@bo_pk_de_updatepku');
+// Delete PKU
+Route::delete('bo_pk_del_pkudata','PkuController@bo_pk_del_pkudata');

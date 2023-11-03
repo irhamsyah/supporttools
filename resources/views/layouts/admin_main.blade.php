@@ -1445,7 +1445,7 @@ $("#datatabungan").on('click','#klik',function(){
      document.getElementById("addnmunit").value=col2;
 
       });
-      // Update Perkiraan 
+      // Update KDO 
       $('#modal-edit-kdo').on('show.bs.modal', function(e) {
         var Id = $(e.relatedTarget).data('id');
         var Region = $(e.relatedTarget).data('region');
@@ -1475,6 +1475,33 @@ $("#datatabungan").on('click','#klik',function(){
         $(e.currentTarget).find('input[name="jml_sdm_bisnis"]').val(Jml_sdm_bisnis);
         $(e.currentTarget).find('input[name="jml_std_kdo"]').val(Jml_std_kdo);
         $(e.currentTarget).find('textarea[name="keterangan"]').val(Keterangan);        
+    });
+
+    // UPDATE PKU
+    $('#modal-update-pku').on('show.bs.modal', function(e) {
+        var Id = $(e.relatedTarget).data('id');
+        var Pic_id = $(e.relatedTarget).data('pic_id');
+        var Nama = $(e.relatedTarget).data('nama');
+        var Maya_mkr_target = $(e.relatedTarget).data('maya_mkr_target');
+        var Maya_mkr_realisasi = $(e.relatedTarget).data('maya_mkr_realisasi');
+        var Maya_ulm_target = $(e.relatedTarget).data('maya_ulm_target');
+        var Maya_ulm_realisasi = $(e.relatedTarget).data('maya_ulm_realisasi');
+        var Wulan_target = $(e.relatedTarget).data('wulan_target');
+        var Wulan_realisasi = $(e.relatedTarget).data('wulan_realisasi');
+        var Pameran_target = $(e.relatedTarget).data('pameran_target');
+        var Pameran_realisasi = $(e.relatedTarget).data('pameran_realisasi');
+
+        $(e.currentTarget).find('input[name="id"]').val(Id);
+        $('#idpic').text(Nama);
+        $('#idpic').val(Pic_id);
+        $(e.currentTarget).find('input[name="mba_maya_mekaar_target"]').val(Maya_mkr_target);
+$(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_realisasi);
+        $(e.currentTarget).find('input[name="mba_maya_ulamm_target"]').val(Maya_ulm_target);
+    $(e.currentTarget).find('input[name="mba_maya_ulamm_realisasi"]').val(Maya_ulm_realisasi);
+        $(e.currentTarget).find('input[name="kak_wulan_mekaar_target"]').val(Wulan_target);
+        $(e.currentTarget).find('input[name="kak_wulan_mekaar_realisasi"]').val(Wulan_realisasi);
+        $(e.currentTarget).find('input[name="pameran_target"]').val(Pameran_target);
+      $(e.currentTarget).find('input[name="pameran_realisasi"]').val(Pameran_realisasi);
     });
 
     });
