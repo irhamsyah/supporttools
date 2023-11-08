@@ -3,13 +3,22 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9d91210a500032216480976d2c93a17523cfdc62',
+        'reference' => '158b7bfac07f5185cc0400b7da1812d6af015122',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'arielmejiadev/larapex-charts' => array(
+            'pretty_version' => '2.1.1',
+            'version' => '2.1.1.0',
+            'reference' => '821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../arielmejiadev/larapex-charts',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'askedio/laravel-soft-cascade' => array(
             'pretty_version' => '7.0.1',
             'version' => '7.0.1.0',
@@ -430,7 +439,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9d91210a500032216480976d2c93a17523cfdc62',
+            'reference' => '158b7bfac07f5185cc0400b7da1812d6af015122',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -28,6 +28,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -143,8 +144,6 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">Supporting Tools</span>
     </a>
-
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar Menu -->
@@ -160,7 +159,7 @@
               </a>
               <ul class="nav nav-treeview">
                   <li class="nav-item has-treeview menu-close">
-                    <a href="/adm_transaction" class="nav-link">
+                    <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
                       <p class="pl-1">PPI KDO</p>
                     </a>
@@ -173,6 +172,7 @@
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
                               <a href="/bo_kd_de_showformentrykdo" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
                                 <p class="pl-3">Data KDO</p>
                               </a>
                             </li>
@@ -182,7 +182,7 @@
                     </ul>
                   </li>
                   <li class="nav-item has-treeview menu-close">
-                    <a href="/adm_transaction" class="nav-link">
+                    <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
                       <p class="pl-1">PKU</p>
                     </a>
@@ -197,7 +197,40 @@
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
                               <a href="/bo_kd_de_showformentrypku" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
                                 <p class="pl-3">Data PKU</p>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                    </ul>
+                  </li>
+                  {{-- SDM  --}}
+                  <li class="nav-item has-treeview menu-close">
+                    <a href="#" class="nav-link">
+                      <i class="right fas fa-angle-left"></i>
+                      <p class="pl-1">SDM</p>
+                    </a>
+                {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                          <a href="#" class="nav-link">
+                            <i class="right fas fa-angle-left"></i>
+                            <p class="pl-2">ENTRY DATA</p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="/bo_sd_de_showformentrymekaar" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <p class="pl-3">Karyawan Mekaar</p>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="/bo_sd_de_showformentry" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <p class="pl-3">Karyawan ULaMM</p>
                               </a>
                             </li>
                           </ul>
@@ -213,76 +246,15 @@
                 <p class="pl-0">LAPORAN</p>
               </a>
               <ul class="nav nav-treeview">
+                <li class="nav-item has-treeview menu-close">
+                  <a href="#" class="nav-link">
+                    <p class="pl-1">PPI</p>
+                  </a>
+                </li>
                   <li class="nav-item has-treeview menu-close">
-                    <a href="/adm_transaction" class="nav-link">
-                      <i class="right fas fa-angle-left"></i>
-                      <p class="pl-1">PPI KDO</p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item has-treeview <?php if(($menu=='en')){echo'menu-open';}?>">
-                          <a href="#" class="nav-link <?php if($menu=='en'){echo 'active';} ?>" >
-                            <i class="right fas fa-angle-left"></i>
-                            <p class="pl-2">ENTRY DATA</p>
-                          </a>
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                              <a href="/bo_kd_de_showformentrykdo" class="nav-link">
-                                <p class="pl-3">Data KDO</p>
-                              </a>
-                            </li>
-                            {{-- VALIDASI --}}
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <p class="pl-3">Validasi Data Transaksi</p>
-                              </a>
-                            </li>
-                            {{-- PENCATATAN TRANSAKSI --}}
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <p class="pl-3">Pencatatan Transaksi</p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <p class="pl-3">History Pencatatan Jurnal</p>
-                              </a>
-                            </li>
-
-                          </ul>
-                        </li>
-                        <li class="nav-item has-treeview <?php if(($menu=='de')){echo'menu-open';}?>">
-                          <a href="#" class="nav-link <?php if($menu=='de'){echo 'active';} ?>" >
-                            <i class="right fas fa-angle-left"></i>
-                            <p class="pl-2">DATA ENTRY</p>
-                          </a>
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item has-treeview <?php if(($menu=='de')){echo'menu-open';}?>">
-                              <a href="#" class="nav-link <?php if($menu=='de'){echo 'active';} ?>" >                           <i class="right fas fa-angle-left"></i>
-                                <p class="pl-3">Daftar Perkiraan GL (CoA)</p>
-                              </a>
-                              <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                  <a href="#" class="nav-link">
-                                    <p class="pl-4">Daftar Perkiraan</p>
-                                  </a>
-                                </li>
-                              </ul>
-                            </li>
-                            {{-- VALIDASI --}}
-                            <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                <p class="pl-3">Pencatatan Kode Transaksi</p>
-                              </a>
-                            </li>
-                            {{-- PENCATATAN TRANSAKSI --}}
-                          </ul>
-                        </li>                
-                    </ul>
-                  </li>
-                  <li class="nav-item has-treeview menu-close">
-                    <a href="/adm_transaction" class="nav-link">
-                      <i class="right fas fa-angle-left"></i>
-                      <p class="pl-1">INVENTARIS</p>
+                    <a href="/bo_pk_cr_pku" class="nav-link">
+                      <i class="fa fa-line-chart" aria-hidden="true"></i>
+                      <p class="pl-1">PKU</p>
                     </a>
                   </li>
               </ul>
@@ -1502,6 +1474,32 @@ $(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_
         $(e.currentTarget).find('input[name="kak_wulan_mekaar_realisasi"]').val(Wulan_realisasi);
         $(e.currentTarget).find('input[name="pameran_target"]').val(Pameran_target);
       $(e.currentTarget).find('input[name="pameran_realisasi"]').val(Pameran_realisasi);
+    });
+
+    // UPDATE SDM MEKAAR
+    $('#modal-update-sdmmekaar').on('show.bs.modal', function(e) {
+
+        var Kode_unit = $(e.relatedTarget).data('kode_unit');
+        var Nama_unit = $(e.relatedTarget).data('nama_unit');
+        var Noa_nasabah = $(e.relatedTarget).data('noa_nasabah');
+        var Kum = $(e.relatedTarget).data('kum');
+        var Sao_standard = $(e.relatedTarget).data('sao_standard');
+        var Sao_realisasi = $(e.relatedTarget).data('sao_realisasi');
+        var Ao_standard = $(e.relatedTarget).data('ao_standard');
+        var Ao_realisasi = $(e.relatedTarget).data('ao_realisasi');
+        var Fao_standard = $(e.relatedTarget).data('fao_standard');
+        var Fao_realisasi = $(e.relatedTarget).data('fao_realisasi');
+
+        $('#idpic').text(Nama_unit);
+        $('#idpic').val(Kode_unit);
+        $(e.currentTarget).find('input[name="noa_nasabah"]').val(Noa_nasabah);
+        $(e.currentTarget).find('input[name="kum"]').val(Kum);
+        $(e.currentTarget).find('input[name="Sao_standard"]').val(Sao_standard);
+        $(e.currentTarget).find('input[name="Sao_realisasi"]').val(Sao_realisasi);
+        $(e.currentTarget).find('input[name="ao_standard"]').val(Ao_standard);
+        $(e.currentTarget).find('input[name="ao_realisasi"]').val(Ao_realisasi);
+        $(e.currentTarget).find('input[name="fao_standard"]').val(Fao_standard);
+      $(e.currentTarget).find('input[name="fao_realisasi"]').val(Fao_realisasi);
     });
 
     });

@@ -22,6 +22,9 @@
         <div class="card">
           <div class="card-header">
             <div class="col-lg-3 col-sm-3" style="float:right;">
+              <a href="{{route('showchart')}}" class="btn btn-info" style="margin-left: 150px">
+                <i class="fa fa-line-chart" aria-hidden="true"></i>
+              </a>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-datapku" style="float: right;">
                 <i class="fa fa-plus"></i>
               </button>
@@ -56,7 +59,6 @@
                 </tr>
                 </thead>
               <tbody>
-              {{-- @foreach($tabungan->chunk(100) as $index => $values) --}}
               @php($index=0)
                   @foreach($pkudt as $value)
                     <tr>

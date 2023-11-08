@@ -62,3 +62,7 @@ Route::post('bo_pk_de_addpku','PkuController@bo_pk_de_addpku');
 Route::post('bo_pk_de_updatepku','PkuController@bo_pk_de_updatepku');
 // Delete PKU
 Route::delete('bo_pk_del_pkudata','PkuController@bo_pk_del_pkudata');
+// Report bentuk Chart Column
+Route::get('bo_pk_cr_pku','PkuController@bo_pk_cr_pku')->name('showchart');
+// Show form PKU
+Route::get('bo_sd_de_showformentrymekaar','SdmController@bo_sd_de_showformentrymekaar');

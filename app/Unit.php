@@ -10,6 +10,14 @@ class Unit extends Model
     {
         return $this->hasMany('App\Inventory','kode_unit','kode_unit');
     }
+    
+    public function sdmmekaar()
+    {
+        return $this->hasMany('App\Sdmmekaar','kode_unit','kode_unit');
+    }
+
+
+
     public $timestamps = false;
     protected $table = 'unit';
     protected $fillable = [

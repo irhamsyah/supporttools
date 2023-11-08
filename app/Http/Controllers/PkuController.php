@@ -9,6 +9,7 @@ Use App\Logo;
 Use App\Unit;
 Use App\Pkudata;
 Use App\Area;
+use App\Charts\PkuModelChart;
 use App\Pkuuser;
 
 class PkuController extends Controller
@@ -89,6 +90,10 @@ class PkuController extends Controller
         ]);
         Pkudata::where('id',$request->id)->delete();
         return redirect()->route('showformentrypku')->with('alert','Data Berhasil di Delete');
-
+    }
+    // Tampilin Chart
+    public function bo_pk_cr_pku(PkuModelChart $chart)
+    {   
+        return view('chart.rptchartpku',['chart'=>$chart->build()]);
     }
 }

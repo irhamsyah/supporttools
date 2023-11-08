@@ -95,5 +95,6 @@ return array(
     'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src/Asm89/Stack'),
     'Askedio\\SoftCascade\\' => array($vendorDir . '/askedio/laravel-soft-cascade/src'),
+    'ArielMejiaDev\\LarapexCharts\\' => array($vendorDir . '/arielmejiadev/larapex-charts/src'),
     'App\\' => array($baseDir . '/app'),
 );
