@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSdmulammsTable extends Migration
+class CreateUnitulammsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateSdmulammsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sdmulamms', function (Blueprint $table) {
-            $table->id();
+        Schema::create('unitulamms', function (Blueprint $table) {
             $table->string('kode_unit',10)->primary();
-            $table->integer('kuu')->nullable();
-            $table->integer('aom')->nullable();
-            $table->integer('kam')->nullable();
-            $table->integer('aom_pantas')->nullable();
+            $table->string('nama_unit',100);
         });
     }
 
@@ -30,6 +26,6 @@ class CreateSdmulammsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sdmulamms');
+        Schema::dropIfExists('unitulamms');
     }
 }

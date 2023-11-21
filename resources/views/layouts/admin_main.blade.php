@@ -44,8 +44,8 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
   <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}"> --}}
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- overlayScrollbars -->
@@ -79,9 +79,9 @@
   </style>
 
   {{-- Data Table --}}
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css"> 
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> 
 
   <!-- SweetAlert2 -->
   <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -154,14 +154,19 @@
           <li class="nav-header">MAIN MENU</li>
             <li class="nav-item has-treeview <?php if($mainmenu=='bo'){echo 'menu-open';}?>">
               <a href="#" class="nav-link <?php if($mainmenu=='bo'){echo 'active';}?>">
+                @if(Auth::user()->privilege=='admin'||Auth::user()->privilege=='ppi'||Auth::user()->privilege=='pku'||Auth::user()->privilege=='sdm')
+
                 <i class="right fas fa-angle-left"></i>
                 <p class="pl-0">INPUTAN DATA</p>
+                @endif
               </a>
               <ul class="nav nav-treeview">
+                {{-- MENU UNTUK PKU --}}
+                @if(Auth::user()->privilege=='ppi')
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
-                      <p class="pl-1">PPI KDO</p>
+                      <p class="pl-1">PPI</p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item has-treeview <?php if(($menu=='en')){echo'menu-open';}?>">
@@ -176,11 +181,20 @@
                                 <p class="pl-3">Data KDO</p>
                               </a>
                             </li>
+                            <li class="nav-item">
+                              <a href="/bo_kd_de_showformentrypc" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <p class="pl-3">Data PPI IT</p>
+                              </a>
+                            </li>
+
                             {{-- VALIDASI --}}
                           </ul>
                         </li>
                     </ul>
                   </li>
+                @elseif (Auth::user()->privilege=='pku')
+
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
@@ -206,6 +220,7 @@
                     </ul>
                   </li>
                   {{-- SDM  --}}
+                  @elseif(Auth::user()->privilege=='sdm')
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
@@ -228,7 +243,7 @@
                           </ul>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="/bo_sd_de_showformentry" class="nav-link">
+                              <a href="/bo_sd_de_showformentryulamm" class="nav-link">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                 <p class="pl-3">Karyawan ULaMM</p>
                               </a>
@@ -237,26 +252,76 @@
                         </li>
                     </ul>
                   </li>
+                  @endif
               </ul>
             </li>
             {{-- REPORT --}}
             <li class="nav-item has-treeview <?php if($mainmenu=='rp'){echo 'menu-open';}?>">
               <a href="#" class="nav-link <?php if($mainmenu=='rp'){echo 'active';}?>">
                 <i class="right fas fa-angle-left"></i>
-                <p class="pl-0">LAPORAN</p>
+                <p class="pl-0">LAPORAN/EXPORT</p>
               </a>
               <ul class="nav nav-treeview">
+                @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='view')
                 <li class="nav-item has-treeview menu-close">
                   <a href="#" class="nav-link">
+                    <i class="right fas fa-angle-left"></i>
                     <p class="pl-1">PPI</p>
                   </a>
+                {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
+                <ul class="nav nav-treeview">
+                    <li class="nav-item has-treeview">
+                      <a href="bo_lp_ppi_kdo" class="nav-link">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <p class="pl-2">Ketersediaan KDO</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="bo_lp_ppi_pclaptop" class="nav-link">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <p class="pl-2">Ketersediaan PC/Laptop</p>
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                  <li class="nav-item has-treeview menu-close">
+                @endif
+                @if(Auth::user()->privilege=='pku'||Auth::user()->privilege=='view')
+                <li class="nav-item has-treeview menu-close">
                     <a href="/bo_pk_cr_pku" class="nav-link">
                       <i class="fa fa-line-chart" aria-hidden="true"></i>
                       <p class="pl-1">PKU</p>
                     </a>
-                  </li>
+                </li>
+                @endif
+                @if(Auth::user()->privilege=='sdm'||Auth::user()->privilege=='view')
+                <li class="nav-item has-treeview menu-close">
+                  <a href="#" class="nav-link">
+                    <i class="right fas fa-angle-left"></i>
+                    <p class="pl-1">SDM</p>
+                  </a>
+                {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
+                <ul class="nav nav-treeview">
+                    <li class="nav-item has-treeview">
+                      <a href="bo_lp_sdm_mekaar" class="nav-link">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <p class="pl-2">SDM Mekaar</p>
+                      </a>
+                    </li>
+                    <li class="nav-item has-treeview">
+                      <a href="bo_lp_sdm_chartmekaar" class="nav-link">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        <p class="pl-2">Chart SDM Mekaar</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="bo_lp_sdm_ulamm" class="nav-link">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <p class="pl-2">SDM ULaMM</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                @endif
               </ul>
             </li>
           <li class="nav-item has-treeview menu-open">
@@ -321,10 +386,10 @@
 <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- DataTables -->
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+{{-- <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script> --}}
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- jquery-validation -->
@@ -339,6 +404,8 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 <script>
+      new DataTable('#example1');
+
   // fungsi ambil value text No_rekening disamakan ke No_alternatif
 $(document).ready(function(){
 		$("#norekadd").change(
@@ -1479,8 +1546,11 @@ $(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_
     // UPDATE SDM MEKAAR
     $('#modal-update-sdmmekaar').on('show.bs.modal', function(e) {
 
+      // alert($(e.relatedTarget).data('nama_unit').replace("_"," "));
+        var Id = $(e.relatedTarget).data('id');
         var Kode_unit = $(e.relatedTarget).data('kode_unit');
-        var Nama_unit = $(e.relatedTarget).data('nama_unit');
+        // menghilangkan char _ ganti ke spasi
+        var Nama_unit = $(e.relatedTarget).data('nama_unit').replace(/_/g," ");
         var Noa_nasabah = $(e.relatedTarget).data('noa_nasabah');
         var Kum = $(e.relatedTarget).data('kum');
         var Sao_standard = $(e.relatedTarget).data('sao_standard');
@@ -1492,6 +1562,8 @@ $(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_
 
         $('#idpic').text(Nama_unit);
         $('#idpic').val(Kode_unit);
+        $(e.currentTarget).find('input[name="id"]').val(Id);
+        $(e.currentTarget).find('input[name="kode_unit"]').val(Kode_unit);
         $(e.currentTarget).find('input[name="noa_nasabah"]').val(Noa_nasabah);
         $(e.currentTarget).find('input[name="kum"]').val(Kum);
         $(e.currentTarget).find('input[name="Sao_standard"]').val(Sao_standard);
@@ -1501,9 +1573,68 @@ $(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_
         $(e.currentTarget).find('input[name="fao_standard"]').val(Fao_standard);
       $(e.currentTarget).find('input[name="fao_realisasi"]').val(Fao_realisasi);
     });
+        // UPDATE SDM ULAMM
+        $('#modal-update-sdmulamm').on('show.bs.modal', function(e) {
+              // alert($(e.relatedTarget).data('kode_unit'));
+              // alert($(e.relatedTarget).data('nama_unit').replace("_"," "));
+              var Id = $(e.relatedTarget).data('id');
+              var Kode_unit = $(e.relatedTarget).data('kode_unit');
+              var Nama_unit = $(e.relatedTarget).data('nama_unit').replace("_"," ");
+              var Kuu = $(e.relatedTarget).data('kuu');
+              var Aom = $(e.relatedTarget).data('aom');
+              var Kam = $(e.relatedTarget).data('kam');
+              var Aom_pantas = $(e.relatedTarget).data('aom_pantas');
 
-    });
+              $('#idpic').text(Nama_unit);
+              $('#idpic').val(Kode_unit);
+              $(e.currentTarget).find('input[name="kode_unit"]').val(Kode_unit);
+              $(e.currentTarget).find('input[name="id"]').val(Id);
+              $(e.currentTarget).find('input[name="kuu"]').val(Kuu);
+              $(e.currentTarget).find('input[name="aom"]').val(Aom);
+              $(e.currentTarget).find('input[name="kom"]').val(Kam);
+              $(e.currentTarget).find('input[name="aom_pantas"]').val(Aom_pantas);
+              });
+          });
 
+          // EDIT PC/LAPTOP
+      $('#modal-edit-pclaptop').on('show.bs.modal', function(e) {
+
+            var Id = $(e.relatedTarget).data('id');
+            var Id_region = $(e.relatedTarget).data('id_region');
+            var Region = $(e.relatedTarget).data('nama_region').replace(/_/g," ");
+            var Id_area = $(e.relatedTarget).data('id_area');
+            var Nama_area = $(e.relatedTarget).data('nama_area').replace(/_/g," ");
+            var Kode_unit = $(e.relatedTarget).data('kode_unit');
+        // menghilangkan char _ ganti ke spasi
+        var Nama_unit = $(e.relatedTarget).data('nama_unit').replace(/_/g," ");
+            var Jumlah_laptop_pc = $(e.relatedTarget).data('jumlah_laptop_pc');
+            var Laptop_pc_aktif = $(e.relatedTarget).data('laptop_pc_aktif');
+            var Laptop_pc_rusak = $(e.relatedTarget).data('laptop_pc_rusak');
+            var Laptop_pc_jt_lelang = $(e.relatedTarget).data('laptop_pc_jt_lelang');
+            var Laptop_pc_hilang = $(e.relatedTarget).data('laptop_pc_hilang');
+            var Jml_fao = $(e.relatedTarget).data('jml_fao');
+            var Jml_std_laptop = $(e.relatedTarget).data('jml_std_laptop');
+            var Keterangan = $(e.relatedTarget).data('keterangan');
+
+            $(e.currentTarget).find('input[name="id"]').val(Id);
+            $('#idregion').val(Id_region);
+            $('#idregion').text(Region);
+            $('#idarea').val(Id_area);
+            $('#idarea').text(Nama_area);
+            $('#idpic').text(Nama_unit);
+            $('#idpic').val(Kode_unit);
+
+            $(e.currentTarget).find('input[name="namaregion"]').val(Id_region);
+            // $(e.currentTarget).find('input[name="nama_unit"]').val(Nama_unit);
+        $(e.currentTarget).find('input[name="jumlah_laptop_pc"]').val(Jumlah_laptop_pc);
+          $(e.currentTarget).find('input[name="laptop_pc_aktif"]').val(Laptop_pc_aktif);
+          $(e.currentTarget).find('input[name="laptop_pc_rusak"]').val(Laptop_pc_rusak);
+  $(e.currentTarget).find('input[name="laptop_pc_jt_lelang"]').val(Laptop_pc_jt_lelang);
+        $(e.currentTarget).find('input[name="laptop_pc_hilang"]').val(Laptop_pc_hilang);
+            $(e.currentTarget).find('input[name="jml_fao"]').val(Jml_fao);
+            $(e.currentTarget).find('input[name="jml_std_laptop"]').val(Jml_std_laptop);
+          $(e.currentTarget).find('textarea[name="keterangan"]').val(Keterangan);        
+      });
 
 </script>
 <script>

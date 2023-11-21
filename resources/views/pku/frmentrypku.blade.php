@@ -22,7 +22,7 @@
         <div class="card">
           <div class="card-header">
             <div class="col-lg-3 col-sm-3" style="float:right;">
-              <a href="{{route('showchart')}}" class="btn btn-info" style="margin-left: 150px">
+              <a href="{{route('showchart')}}" class="btn btn-info" style="margin-left: 140px">
                 <i class="fa fa-line-chart" aria-hidden="true"></i>
               </a>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-datapku" style="float: right;">
@@ -33,7 +33,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-hover table-dark" width="100">
+            <table id="contoh" class="table table-bordered table-hover table-dark" width="100">
                 <thead>
                 <tr>
                     <th rowspan="3">PIC</th>

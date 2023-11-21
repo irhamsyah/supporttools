@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 Use App\User;
@@ -9,11 +10,18 @@ Use App\Logo;
 Use App\Inventory;
 Use App\Unit;
 Use App\Region;
-Use App\Area;
-
+use App\Itppi;
+Use App\Exports\ReportKdoExport;
+Use App\Exports\ReportLaptopExport;
+Use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function bo_kd_de_showformentrykdo()
     {
         $logos = Logo::all();
@@ -113,5 +121,126 @@ class InventoryController extends Controller
         Inventory::where('id', $request->id)->delete();
         return redirect()->route('showformentrykdo')->with('alert','DELET DATA KDO BERHASIL');
 
+    }
+    // Show form PPI IT Entry PC
+    public function bo_kd_de_showformentrypc() 
+    {
+        $logos = Logo::all();
+        $users = User::all();
+        $area = Area::all();
+
+        $inventory = Itppi::with(['unit','region','area'])->get();
+        $unit = Unit::all();
+        $region = Region::all();
+        return view('ppi.formentryppiit',['users' =>$users,'logos' =>$logos,'unit'=>$unit,'region'=>$region,'area'=>$area,'daftar'=>$inventory,'msgstatus' =>'']);
+    }
+    // Update data pc/laptop ITPPI
+    public function bo_it_de_updatepclaptop(Request $request)
+    {   
+        // dd($request);
+        $this->validate($request,
+        [
+            "id" => "required",
+        ]);
+        if($request->namaregion==$request->region){
+            Itppi::where('id',$request->id)
+            ->update(
+                [
+                    'id_area'=>$request->id_area,
+                    'kode_unit' => $request->kode_unit,
+                    'jumlah_laptop_pc' => $request->jumlah_laptop_pc,
+                    'laptop_pc_aktif' => $request->laptop_pc_aktif,
+                    'laptop_pc_rusak' => $request->laptop_pc_rusak,
+                    'laptop_pc_jt_lelang' => $request->laptop_pc_jt_lelang,
+                    'laptop_pc_hilang' => $request->laptop_pc_hilang,
+                    'jml_fao' => $request->jml_fao,
+                    'jml_std_laptop' => $request->jml_std_laptop,
+                    'gap_laptop' => ($request->laptop_pc_aktif-$request->jml_std_laptop),
+                    'keterangan' => $request->keterangan
+                ]
+            );
+        }else{
+            Itppi::where('id',$request->id)
+            ->update(
+                [
+                    'id_region'=>$request->region,
+                    'id_area'=>$request->id_area,
+                    'kode_unit' => $request->kode_unit,
+                    'jumlah_laptop_pc' => $request->jumlah_laptop_pc,
+                    'laptop_pc_aktif' => $request->laptop_pc_aktif,
+                    'laptop_pc_rusak' => $request->laptop_pc_rusak,
+                    'laptop_pc_jt_lelang' => $request->laptop_pc_jt_lelang,
+                    'laptop_pc_hilang' => $request->laptop_pc_hilang,
+                    'jml_fao' => $request->jml_fao,
+                    'jml_std_laptop' => $request->jml_std_laptop,
+                    'gap_laptop' => ($request->laptop_pc_aktif-$request->jml_std_laptop),
+                    'keterangan' => $request->keterangan
+                ]
+            );
+        }
+        return redirect()->route('showformentrydatapc')->with('alert','Data '.$request->kode_unit.' Berhasil di Update');
+    }
+    // Tambah data laptop /PC
+    public function bo_it_de_addpclaptop(Request $request)
+    {
+        $this->validate($request,[
+            "id_region" => "required",
+            "id_area" => "required",
+            "kode_unit" => "required",
+            "jumlah_laptop_pc" => "required",
+            "laptop_pc_aktif" => "required",
+            "laptop_pc_rusak" => "required",
+            "laptop_pc_jt_lelang" => "required",
+            "laptop_pc_hilang" => "required",
+            "jml_fao" => "required",
+            "jml_std_laptop" => "required"
+        ]);
+        $simpan = new Itppi();
+        $simpan->id_region = $request->id_region;
+        $simpan->id_area = $request->id_area;
+        $simpan->kode_unit = $request->kode_unit;
+        $simpan->jumlah_laptop_pc = $request->jumlah_laptop_pc;
+        $simpan->laptop_pc_aktif = $request->laptop_pc_aktif;
+        $simpan->laptop_pc_rusak = $request->laptop_pc_rusak;
+        $simpan->laptop_pc_jt_lelang = $request->laptop_pc_jt_lelang;
+        $simpan->laptop_pc_hilang = $request->laptop_pc_hilang;
+        $simpan->jml_fao = $request->jml_fao;
+        $simpan->jml_std_laptop = $request->jml_std_laptop;
+        $simpan->save();
+        return redirect()->route('showformentrydatapc')->with('alert','Data '.$request->kode_unit.' Berhasil di Tambahkan');
+    }
+    // Delete data IT/PPI Laptop pc
+    public function bo_del_pclaptop(Request $request) 
+    {
+        $this->validate($request,[
+            'id'=>'required'
+        ]);
+        Itppi::where('id',$request->id)->delete();
+        return redirect()->route('showformentrydatapc')->with('alert','Data '.$request->kode_unit.' Berhasil di Delete');
+    }
+    // Report KDO PPI
+    public function bo_lp_ppi_kdo() 
+    {
+        $daftar = Inventory::all();
+        return view('pdf.ppi.rptppikdo',['daftar' => $daftar]);
+    }
+    // export excel kdo
+    public function export_to_excel_kdo()
+    {
+        $nominatif = DB::select('select * from inventory');
+        return (new ReportKdoExport($nominatif))->download('exportkdo.xlsx');
+    }
+    // Report PC IT
+    public function bo_lp_ppi_pclaptop() 
+    {
+        $daftar = Itppi::with(['region','area','unit'])->get();
+        return view('pdf.ppi.rptppilaptoppc',['daftar'=>$daftar]);
+    }
+    // Export excel Laptop PC
+    public function export_to_excel_laptoppc()
+    {
+        $daftar = DB::select('select *,regions.nama_region,areas.nama_area,unit.nama_unit from ((itppis inner join areas on itppis.id_area=areas.id) inner join regions on itppis.id_region=regions.id) inner join unit on itppis.kode_unit=unit.kode_unit');
+        // dd($daftar);
+        return (new ReportLaptopExport($daftar))->download('exportpclaptop.xlsx');
     }
 }

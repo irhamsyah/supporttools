@@ -16,6 +16,7 @@ class PkuModelChart
     public function build()
     {
         $rs = Pkudata::with('pkuuser')->get();
+        // dd($rs);
         $nama =[];
         $target=[];
         $realisasi=[];

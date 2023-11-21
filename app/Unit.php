@@ -16,8 +16,10 @@ class Unit extends Model
         return $this->hasMany('App\Sdmmekaar','kode_unit','kode_unit');
     }
 
-
-
+    public function itppi()
+    {
+        return $this->hasMany('App\Itppi','kode_unit','kode_unit');
+    }
     public $timestamps = false;
     protected $table = 'unit';
     protected $fillable = [

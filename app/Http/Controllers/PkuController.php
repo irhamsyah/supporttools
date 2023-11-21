@@ -14,6 +14,11 @@ use App\Pkuuser;
 
 class PkuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function bo_kd_de_showformentrypku()
     {
         $logos = Logo::all();

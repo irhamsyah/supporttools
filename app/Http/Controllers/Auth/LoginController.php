@@ -42,15 +42,15 @@ class LoginController extends Controller
 
     public function LoginUser(){
         $Kodecabangs = Kodecabang::all();
-
-        return view('auth/login', ['Kodecabangs'=> $Kodecabangs]);
+        // dd($Kodecabangs);
+        return view('auth/login');
         // dd($request);
     }
 
     public function AuthLoginUser(Request $request){
-        $Kodecabangs = Kodecabang::all();
+        // $Kodecabangs = Kodecabang::all();
         //dd(request()->kodecabang);
 
-        return view('auth/login', ['Kodecabangs'=> $Kodecabangs]);
+        return view('auth/login');
     }
 }

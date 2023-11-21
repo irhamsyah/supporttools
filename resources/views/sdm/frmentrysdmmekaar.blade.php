@@ -12,7 +12,7 @@
 <div class="content-wrapper" style="margin-top:10px; max-height:800px !important;">
   <div class="container-fluid">
     <div class="row">
-      <h3 style="margin-left:20px" class="card-title">Entry Data PKU</h3>
+      <h3 style="margin-left:20px" class="card-title">Entry Data SDM Mekaar</h3>
 
       <div class="col-12">
         <div class="card card-warning card-outline">
@@ -22,9 +22,9 @@
         <div class="card">
           <div class="card-header">
             <div class="col-lg-3 col-sm-3" style="float:right;">
-              <a href="{{route('showchart')}}" class="btn btn-info" style="margin-left: 150px">
+              {{-- <a href="{{route('showchart')}}" class="btn btn-info" style="margin-left: 140px">
                 <i class="fa fa-line-chart" aria-hidden="true"></i>
-              </a>
+              </a> --}}
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-sdmmekaar" style="float: right;">
                 <i class="fa fa-plus"></i>
               </button>
@@ -33,9 +33,9 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-hover table-dark" width="100">
+            <table id="example1" class="display" width="100">
                 <thead>
-                <tr>
+                  <tr>
                     <th rowspan="2">No</th>
                     <th rowspan="2">Kode Unit</th>
                     <th rowspan="2">Unit</th>
@@ -52,6 +52,7 @@
                   <th colspan="1" style="text-align: center">Realisasi</th>
                   <th colspan="1" style="text-align: center">Standar</th>
                   <th colspan="1" style="text-align: center">Realisasi</th>
+                  <th rowspan="1" colspan="1" style="text-align: center">Action</th>
                 </tr>
                 </thead>
               <tbody>
@@ -76,8 +77,10 @@
                           </a>
                           <div class="dropdown-menu">
                           <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-update-sdmmekaar"
+                              data-id={{ $value->id }}
                               data-kode_unit={{ $value->kode_unit }}
-                              data-nama_unit={{ $value->unit->nama_unit }}
+                              {{-- ini teknik mengatasi kata yang ga muncul di jquery dgn mengganti spasi jadi _ --}}
+                              data-nama_unit={{ str_replace(" ","_",$value->unit->nama_unit)}}
                               data-noa_nasabah={{ $value->noa_nasabah }}
                               data-kum={{ $value->kum }}
                               data-sao_standard={{ $value->sao_standard }}
@@ -89,12 +92,12 @@
                               >
                                 Update
                             </a>
-                            <form action="/bo_sd_del_sdmmekaar" method="post" style="margin-bottom: 0;" onclick="return confirm('Apakah anda yakin akan menghapus perkiraan ini?')">
+                            <form action="/bo_sd_del_sdmmekaar" method="post" style="margin-bottom: 0;" onclick="return confirm('Apakah anda yakin akan menghapus Data ini?')">
                               <button type="submit" tabindex="-1" class="dropdown-item">
                                 Delete
                               </button>
                               <input type="hidden" name="_method" value="DELETE"/>
-                              <input type="hidden" name="id" value="{{$value->kode_unit}}"/>
+                              <input type="hidden" name="id" value="{{$value->id}}"/>
                               @csrf
                           </form>
       
@@ -125,9 +128,11 @@
               </button>
             </div>
             <div class="modal-body">
-              <!--Baris ke 1 ADD tabungan ----->
+              <!--Baris ke 1 edit sdm mekaar ----->
               <div class="form-group">
                 <div class="row">
+                  <input type="text" hidden name="id">
+
                   <input type="text" hidden name="kode_unit">
                   <div class="col-lg-3 col-sm-6">
                     <label for="nasabahid">Nama Unit</label>
@@ -203,10 +208,9 @@
               <!--Baris ke 1 ADD tabungan ----->
               <div class="form-group">
                 <div class="row">
-                  <input type="text" hidden name="kode_unit">
                   <div class="col-lg-3 col-sm-6">
                     <label for="nasabahid">Nama Unit</label>
-                    <select class="form-control" name="pic_id">
+                    <select class="form-control" name="kode_unit">
                       <option id="idpic" selected></option>
                       @foreach($unit as $value)
                           <option value="{{$value->kode_unit}}">{{$value->nama_unit}}</option>

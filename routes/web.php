@@ -64,5 +64,50 @@ Route::post('bo_pk_de_updatepku','PkuController@bo_pk_de_updatepku');
 Route::delete('bo_pk_del_pkudata','PkuController@bo_pk_del_pkudata');
 // Report bentuk Chart Column
 Route::get('bo_pk_cr_pku','PkuController@bo_pk_cr_pku')->name('showchart');
-// Show form PKU
-Route::get('bo_sd_de_showformentrymekaar','SdmController@bo_sd_de_showformentrymekaar');
+// Show form SDM Mekaar
+Route::get('bo_sd_de_showformentrymekaar','SdmController@bo_sd_de_showformentrymekaar')->name('showsdmmekaar');
+// Route Update SDM mekaar
+Route::post('bo_sd_de_updsdmmekaar','SdmController@bo_sd_de_updsdmmekaar');
+// Route Add SDM Mekaar
+Route::post('bo_sd_de_addsdmmekaar','SdmController@bo_sd_de_addsdmmekaar');
+// Route Hapus data SDM Mekaar
+Route::delete('bo_sd_del_sdmmekaar','SdmController@bo_sd_del_sdmmekaar');
+// Show form SDM ULaMM
+ Route::get('bo_sd_de_showformentryulamm','SdmController@bo_sd_de_showformentryulamm')->name('showsdmulamm');
+//  Update SDM ULAMM
+Route::post('bo_sd_de_updsdmulamm','SdmController@bo_sd_de_updsdmulamm');
+// Add SDM ULaMM
+Route::post('bo_sd_de_addsdmulamm','SdmController@bo_sd_de_addsdmulamm');
+// Delete SDM ULaMM
+Route::delete('bo_sd_del_sdmulamm','SdmController@bo_sd_del_sdmulamm');
+// Show PPI IT FORM
+Route::get('bo_kd_de_showformentrypc','InventoryController@bo_kd_de_showformentrypc')->name('showformentrydatapc');
+// route menghindari Error : The GET method is not supported for this route
+Route::get('bo_it_de_updatepclaptop','InventoryController@bo_kd_de_showformentrypc');
+// update PPI IT laptop/pc
+Route::post('bo_it_de_updatepclaptop','InventoryController@bo_it_de_updatepclaptop');
+// Add data PPI IT laptop/PC 
+Route::post('bo_it_de_addpclaptop','InventoryController@bo_it_de_addpclaptop');
+// Delete data PPI IT laptop/PC 
+Route::delete('bo_del_pclaptop','InventoryController@bo_del_pclaptop');
+// REPORT-REPORT
+// Pdf Report KDO
+Route::get('bo_lp_ppi_kdo','InventoryController@bo_lp_ppi_kdo');
+// export excel KDO
+Route::get('export_to_excel_kdo','InventoryController@export_to_excel_kdo');
+// PDF Report Laptop 
+Route::get('bo_lp_ppi_pclaptop','InventoryController@bo_lp_ppi_pclaptop');
+// Export Report Laptop 
+Route::get('export_to_excel_laptoppc','InventoryController@export_to_excel_laptoppc');
+// PDF Report SDM Mekaar
+Route::get('bo_lp_sdm_mekaar','SdmController@bo_lp_sdm_mekaar');
+// Export Report SDM Mekaar to excel
+Route::get('export_to_excel_sdmmekaar','SdmController@export_to_excel_sdmmekaar');
+// Chart SDM Mekaar
+Route::get('bo_lp_sdm_chartmekaar','SdmController@bo_lp_sdm_chartmekaar');
+// Bar Chart SDM Mekaar 
+Route::get('bar_chart_sdm_mekaar','SdmController@bar_chart_sdm_mekaar');
+// PDF Report SDM ULaMM 
+Route::get('bo_lp_sdm_ulamm','SdmController@bo_lp_sdm_ulamm');
+// Export Report SDM ULAMM to excel
+Route::get('export_to_excel_sdmulamm','SdmController@export_to_excel_sdmulamm');
