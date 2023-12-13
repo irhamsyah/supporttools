@@ -162,7 +162,7 @@
               </a>
               <ul class="nav nav-treeview">
                 {{-- MENU UNTUK PKU --}}
-                @if(Auth::user()->privilege=='ppi')
+                @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='admin')
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
@@ -193,7 +193,8 @@
                         </li>
                     </ul>
                   </li>
-                @elseif (Auth::user()->privilege=='pku')
+                @endif
+                @if (Auth::user()->privilege=='pku'||Auth::user()->privilege=='admin')
 
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
@@ -219,8 +220,9 @@
                         </li>
                     </ul>
                   </li>
+                  @endif
                   {{-- SDM  --}}
-                  @elseif(Auth::user()->privilege=='sdm')
+                  @if(Auth::user()->privilege=='sdm'||Auth::user()->privilege=='admin')
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
@@ -262,7 +264,7 @@
                 <p class="pl-0">LAPORAN/EXPORT</p>
               </a>
               <ul class="nav nav-treeview">
-                @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='view')
+                @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='view'||Auth::user()->privilege=='admin')
                 <li class="nav-item has-treeview menu-close">
                   <a href="#" class="nav-link">
                     <i class="right fas fa-angle-left"></i>
@@ -285,7 +287,7 @@
                   </ul>
                 </li>
                 @endif
-                @if(Auth::user()->privilege=='pku'||Auth::user()->privilege=='view')
+                @if(Auth::user()->privilege=='pku'||Auth::user()->privilege=='view'||Auth::user()->privilege=='admin')
                 <li class="nav-item has-treeview menu-close">
                     <a href="/bo_pk_cr_pku" class="nav-link">
                       <i class="fa fa-line-chart" aria-hidden="true"></i>
@@ -293,7 +295,7 @@
                     </a>
                 </li>
                 @endif
-                @if(Auth::user()->privilege=='sdm'||Auth::user()->privilege=='view')
+                @if(Auth::user()->privilege=='sdm'||Auth::user()->privilege=='view'||Auth::user()->privilege=='admin')
                 <li class="nav-item has-treeview menu-close">
                   <a href="#" class="nav-link">
                     <i class="right fas fa-angle-left"></i>
