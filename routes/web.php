@@ -90,6 +90,19 @@ Route::post('bo_it_de_updatepclaptop','InventoryController@bo_it_de_updatepclapt
 Route::post('bo_it_de_addpclaptop','InventoryController@bo_it_de_addpclaptop');
 // Delete data PPI IT laptop/PC 
 Route::delete('bo_del_pclaptop','InventoryController@bo_del_pclaptop');
+// Show entry JMT
+Route::get('bo_jm_de_showformentrymainjmt','JmtController@bo_jm_de_showformentrymainjmt')->name('jmtform');
+// Simpan perubhan JMT
+Route::post('bo_pk_de_updatemainjmt','JmtController@bo_pk_de_updatemainjmt');
+// Add Data JMT
+Route::post('bo_jm_de_addmainjmt','JMTController@bo_jm_de_addmainjmt');
+// Hapus data JMT
+Route::delete('bo_jm_del_jmtmaindata','JMTController@bo_jm_del_jmtmaindata');
+// show form kegiatan insidentil JMT
+Route::get('bo_jm_de_showformentryinsijmt','JmtController@bo_jm_de_showformentryinsijmt')->name('entryinsidentil');
+Route::post('bo_jm_de_addjmtins','JmtController@bo_jm_de_addjmtins');
+
+
 // REPORT-REPORT
 // Pdf Report KDO
 Route::get('bo_lp_ppi_kdo','InventoryController@bo_lp_ppi_kdo');
@@ -111,3 +124,5 @@ Route::get('bar_chart_sdm_mekaar','SdmController@bar_chart_sdm_mekaar');
 Route::get('bo_lp_sdm_ulamm','SdmController@bo_lp_sdm_ulamm');
 // Export Report SDM ULAMM to excel
 Route::get('export_to_excel_sdmulamm','SdmController@export_to_excel_sdmulamm');
+// BAR CHART JMT
+Route::get('bo_bar_chart_jmt','JmtController@bo_jm_cr_jmt')->name('showchartjmt');
