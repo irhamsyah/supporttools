@@ -68,7 +68,7 @@
                         data-region={{ $values->region }}
                         data-area={{ $values->area }}
                         data-kode_unit={{ $values->kode_unit }}
-                        data-nama_unit={{{$values->unit->nama_unit}}}
+                        data-nama_unit={{ str_replace(" ","_",$values->unit->nama_unit)}}
                         data-jumlah_kdo={{ $values->jumlah_kdo }}
                         data-kdo_aktif={{ $values->kdo_aktif }}
                         data-kdo_rusak={{ $values->kdo_rusak }}
@@ -77,7 +77,11 @@
                         data-jml_sdm_bisnis={{ $values->jml_sdm_bisnis }}
                         data-jml_std_kdo={{ $values->jml_std_kdo}}
                         data-gap_kdo={{ $values->gap_kdo }}
-                        data-keterangan={{ $values->keterangan}}
+                        @if(is_null($values->keterangan)==false)
+                        data-keterangan={{ str_replace(" ","_",$values->keterangan)}}
+                        @else
+                        data-keterangan={{$values->keterangan}}
+                        @endif
                         >
                           Edit
                       </a>
@@ -178,7 +182,7 @@
                     <input type="number" name="kdo_hilang" class="form-control">
                   </div>
                   <div class="col-lg-2 col-sm-8">
-                    <label for="inputnocif">Jumlah SDM Bisnis</label>
+                    <label for="inputnocif">Jumlah KDO Bisnis</label>
                     <input type="number" name="jml_sdm_bisnis" class="form-control">
                   </div>
                   <div class="col-lg-2 col-sm-8">
