@@ -55,8 +55,8 @@
                 <option value="ppi">PPI</option>
                 <option value="pku">PKU</option>
                 <option value="sdm">SDM</option>
+                <option value="jmt">JMT</option>
                 <option value="view">VIEW</option>
-
             </select>
         </div> <!-- form-group end.// -->
         <div class="form-group input-group">

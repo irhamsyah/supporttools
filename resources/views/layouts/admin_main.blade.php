@@ -255,6 +255,8 @@
                     </ul>
                   </li>
                   @endif
+                  @if(Auth::user()->privilege=='admin'||Auth::user()->privilege=='jmt')
+
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
@@ -286,6 +288,7 @@
                         </li>
                     </ul>
                   </li>
+                  @endif
               </ul>
             </li>
             {{-- REPORT --}}
