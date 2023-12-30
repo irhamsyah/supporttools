@@ -38,9 +38,9 @@
                 <th>Area</th>
                 <th>Kode Unit</th>
                 <th>Nama Unit</th>
-                <th>Jumlah KDO</th>
-                <th>Jumlah KDO Aktif</th>
-                <th>Jumlah KDO JT</th>
+                <th>Jumlah PC/Laptop</th>
+                <th>Jumlah PC/Laptop Aktif</th>
+                <th>Jumlah PC/Laptop JT</th>
                 <th>Action</th>
               </tr>
               </thead>
@@ -78,7 +78,7 @@
                         data-laptop_pc_hilang={{ $values->laptop_pc_hilang}}
                         data-jml_fao={{ $values->jml_fao}}
                         data-jml_std_laptop={{ $values->jml_std_laptop}}
-                        data-keterangan={{ $values->keterangan}}
+                        data-keterangan={{ str_replace(" ","_",$values->keterangan)}}
                         >
                           Edit
                       </a>
