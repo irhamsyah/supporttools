@@ -31,7 +31,6 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {   
-        // dd($request);
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -66,7 +65,7 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {   
-        // dd($request);
+        dd($request);
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
@@ -81,6 +80,8 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
+        dd($request);
+
         return $this->guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
@@ -94,6 +95,8 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
+        dd($request);
+
         return $request->only($this->username(), 'password');
     }
 
@@ -105,6 +108,8 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
+        dd($request);
+
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
@@ -152,6 +157,8 @@ trait AuthenticatesUsers
      */
     public function username()
     {
+        dd('crot');
+
         return 'username';
     }
 
@@ -196,6 +203,7 @@ trait AuthenticatesUsers
      */
     protected function guard()
     {
+        dd('dsfdffsd');
         return Auth::guard();
     }
 }
