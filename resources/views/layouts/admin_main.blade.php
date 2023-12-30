@@ -255,6 +255,37 @@
                     </ul>
                   </li>
                   @endif
+                  <li class="nav-item has-treeview menu-close">
+                    <a href="#" class="nav-link">
+                      <i class="right fas fa-angle-left"></i>
+                      <p class="pl-1">Jasa Managemen</p>
+                    </a>
+                {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                          <a href="#" class="nav-link">
+                            <i class="right fas fa-angle-left"></i>
+                            <p class="pl-2">ENTRY DATA</p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="/bo_jm_de_showformentrymainjmt" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <p class="pl-3">Kegiatan Utama</p>
+                              </a>
+                            </li>
+                          </ul>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="/bo_jm_de_showformentryinsijmt" class="nav-link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <p class="pl-3">Kegiatan Insidentil</p>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                    </ul>
+                  </li>
               </ul>
             </li>
             {{-- REPORT --}}
@@ -1488,11 +1519,12 @@ $("#datatabungan").on('click','#klik',function(){
       });
       // Update KDO 
       $('#modal-edit-kdo').on('show.bs.modal', function(e) {
+        
         var Id = $(e.relatedTarget).data('id');
         var Region = $(e.relatedTarget).data('region');
         var Area = $(e.relatedTarget).data('area');
         var Kode_unit = $(e.relatedTarget).data('kode_unit');
-        var Nama_unit = $(e.relatedTarget).data('nama_unit');
+        var Nama_unit = $(e.relatedTarget).data('nama_unit').replace(/_/g," ");
         var Jumlah_kdo = $(e.relatedTarget).data('jumlah_kdo');
         var Kdo_aktif = $(e.relatedTarget).data('kdo_aktif');
         var Kdo_rusak = $(e.relatedTarget).data('kdo_rusak');
@@ -1501,7 +1533,14 @@ $("#datatabungan").on('click','#klik',function(){
         var Jml_sdm_bisnis = $(e.relatedTarget).data('jml_sdm_bisnis');
         var Jml_std_kdo = $(e.relatedTarget).data('jml_std_kdo');
         var Gap_kdo = $(e.relatedTarget).data('gap_kdo');
-        var Keterangan = $(e.relatedTarget).data('keterangan');
+        
+        if($(e.relatedTarget).data('keterangan')==null)
+        {
+          var Keterangan = "";
+        } else if($(e.relatedTarget).data('keterangan')!==null)
+        {
+          var Keterangan = $(e.relatedTarget).data('keterangan').replace(/_/g," ");
+        }
 
         $(e.currentTarget).find('input[name="id"]').val(Id);
         $('#idregion').text(Region);
@@ -1616,7 +1655,13 @@ $(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_
             var Laptop_pc_hilang = $(e.relatedTarget).data('laptop_pc_hilang');
             var Jml_fao = $(e.relatedTarget).data('jml_fao');
             var Jml_std_laptop = $(e.relatedTarget).data('jml_std_laptop');
-            var Keterangan = $(e.relatedTarget).data('keterangan');
+            if($(e.relatedTarget).data('keterangan').replace(/_/g," ")==null)
+            {
+              var Keterangan="";  
+            }else if($(e.relatedTarget).data('keterangan').replace(/_/g," ")!=null)
+            {
+              var Keterangan = $(e.relatedTarget).data('keterangan').replace(/_/g," ");
+            }
 
             $(e.currentTarget).find('input[name="id"]').val(Id);
             $('#idregion').val(Id_region);
@@ -1637,6 +1682,41 @@ $(e.currentTarget).find('input[name="mba_maya_mekaar_realisasi"]').val(Maya_mkr_
             $(e.currentTarget).find('input[name="jml_std_laptop"]').val(Jml_std_laptop);
           $(e.currentTarget).find('textarea[name="keterangan"]').val(Keterangan);        
       });
+
+      // UPDATE FORM JMT - SLR 
+      $('#modal-update-jmt').on('show.bs.modal', function(e) {
+          var Id = $(e.relatedTarget).data('id');
+          var Nama = $(e.relatedTarget).data('nama').replace(/_/g," ");
+          var Targets = $(e.relatedTarget).data('targets');
+          var Realisasi = $(e.relatedTarget).data('realisasi');
+          $(e.currentTarget).find('input[name="id"]').val(Id);
+          $(e.currentTarget).find('input[name="nama"]').val(Nama);
+          $(e.currentTarget).find('input[name="target"]').val(Targets);
+          $(e.currentTarget).find('input[name="realisasi"]').val(Realisasi);
+          });
+
+          $('#modal-update-jmtins').on('show.bs.modal', function(e) {
+
+              var Id = $(e.relatedTarget).data('id');
+              var Jenis_kegiatan = $(e.relatedTarget).data('jenis_kegiatan').replace(/_/g," ");
+              var Tgl_kegiatan = $(e.relatedTarget).data('tgl_kegiatan');
+              var Jml_peserta = $(e.relatedTarget).data('jml_peserta');
+              if($(e.relatedTarget).data('keterangan').replace(/_/g," ")==null)
+              {
+                var Keterangan = "";
+              }else if($(e.relatedTarget).data('keterangan').replace(/_/g," ")!=null)
+              {
+                var Keterangan = $(e.relatedTarget).data('keterangan').replace(/_/g," ");
+              }
+
+              $(e.currentTarget).find('input[name="id"]').val(Id);
+$(e.currentTarget).find('input[name="jenis_kegiatan_edit"]').val(Jenis_kegiatan);
+              $(e.currentTarget).find('input[name="tgl_kegiatan_edit"]').val(Tgl_kegiatan);
+              $(e.currentTarget).find('input[name="jml_peserta_edit"]').val(Jml_peserta);
+            $(e.currentTarget).find('textarea[name="keterangan_edit"]').val(Keterangan);        
+          });
+
+
 
 </script>
 <script>
