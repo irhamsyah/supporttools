@@ -154,14 +154,14 @@
           <li class="nav-header">MAIN MENU</li>
             <li class="nav-item has-treeview <?php if($mainmenu=='bo'){echo 'menu-open';}?>">
               <a href="#" class="nav-link <?php if($mainmenu=='bo'){echo 'active';}?>">
-                @if(Auth::user()->privilege=='admin'||Auth::user()->privilege=='ppi'||Auth::user()->privilege=='pku'||Auth::user()->privilege=='sdm')
+                @if(Auth::user()->privilege=='admin'||Auth::user()->privilege=='ppi'||Auth::user()->privilege=='pku'||Auth::user()->privilege=='sdm'||Auth::user()->privilege=='jmt')
 
                 <i class="right fas fa-angle-left"></i>
                 <p class="pl-0">INPUTAN DATA</p>
                 @endif
               </a>
               <ul class="nav nav-treeview">
-                {{-- MENU UNTUK PKU --}}
+                {{-- MENU UNTUK PPI --}}
                 @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='admin')
                   <li class="nav-item has-treeview menu-close">
                     <a href="#" class="nav-link">
@@ -255,16 +255,16 @@
                     </ul>
                   </li>
                   @endif
-                  @if(Auth::user()->privilege=='admin'||Auth::user()->privilege=='jmt')
-
+                  @if(Auth::user()->privilege==='jmt'||Auth::user()->privilege==='admin')
                   <li class="nav-item has-treeview menu-close">
+
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
-                      <p class="pl-1">Jasa Managemen</p>
+                      <p class="pl-1">Jasa ManagemenT</p>
                     </a>
-                {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
+                    {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
                     <ul class="nav nav-treeview">
-                        <li class="nav-item has-treeview">
+                      <li class="nav-item has-treeview">
                           <a href="#" class="nav-link">
                             <i class="right fas fa-angle-left"></i>
                             <p class="pl-2">ENTRY DATA</p>
@@ -286,19 +286,20 @@
                             </li>
                           </ul>
                         </li>
-                    </ul>
+                      </ul>
                   </li>
                   @endif
               </ul>
             </li>
             {{-- REPORT --}}
+            @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='view'||Auth::user()->privilege=='admin')
+
             <li class="nav-item has-treeview <?php if($mainmenu=='rp'){echo 'menu-open';}?>">
               <a href="#" class="nav-link <?php if($mainmenu=='rp'){echo 'active';}?>">
                 <i class="right fas fa-angle-left"></i>
                 <p class="pl-0">LAPORAN/EXPORT</p>
               </a>
               <ul class="nav nav-treeview">
-                @if(Auth::user()->privilege=='ppi'||Auth::user()->privilege=='view'||Auth::user()->privilege=='admin')
                 <li class="nav-item has-treeview menu-close">
                   <a href="#" class="nav-link">
                     <i class="right fas fa-angle-left"></i>
@@ -357,9 +358,10 @@
                     </li>
                   </ul>
                 </li>
-                @endif
               </ul>
             </li>
+            @endif
+
           <li class="nav-item has-treeview menu-open">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
