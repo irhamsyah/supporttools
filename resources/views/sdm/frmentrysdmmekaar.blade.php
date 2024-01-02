@@ -164,7 +164,7 @@
                     <input type="number" id="editalamatnasabah" name="ao_standard" class="form-control" value=0>
                   </div>
                   <div class="col-lg-2 col-sm-8">
-                    <label for="inputnocif">Jml Ao Standard</label>
+                    <label for="inputnocif">Jml Ao Realisasi</label>
                     <input type="number" id="editalamatnasabah" name="ao_realisasi" class="form-control" value=0>
                   </div>
                   <div class="col-lg-2 col-sm-8">
