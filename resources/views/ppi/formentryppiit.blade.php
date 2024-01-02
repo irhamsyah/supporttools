@@ -41,6 +41,7 @@
                 <th>Jumlah PC/Laptop</th>
                 <th>Jumlah PC/Laptop Aktif</th>
                 <th>Jumlah PC/Laptop JT</th>
+                <th>Keterangan</th>
                 <th>Action</th>
               </tr>
               </thead>
@@ -57,6 +58,7 @@
                   <td>{{ $values->jumlah_laptop_pc }}</td>
                   <td>{{ $values->laptop_pc_aktif }}</td>
                   <td>{{ $values->laptop_pc_jt_lelang }}</td>
+                  <td>{{ $values->keterangan }}</td>
                   <td>
                     <a class="dropdown-toggle btn btn-block bg-gradient-primary btn-sm" data-toggle="dropdown" href="#">
                       Action <span class="caret"></span>
