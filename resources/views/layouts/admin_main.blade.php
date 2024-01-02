@@ -260,7 +260,7 @@
 
                     <a href="#" class="nav-link">
                       <i class="right fas fa-angle-left"></i>
-                      <p class="pl-1">Jasa ManagemenT</p>
+                      <p class="pl-1">Jasa Management</p>
                     </a>
                     {{-- Muncul panah yang bisa hadap kebawah untuk munculin menu didlmnya --}}
                     <ul class="nav nav-treeview">
