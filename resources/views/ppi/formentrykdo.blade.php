@@ -41,6 +41,7 @@
                 <th>Jumlah KDO</th>
                 <th>Jumlah KDO Aktif</th>
                 <th>Jumlah KDO JT</th>
+                <th>Keterangan</th>
                 <th>Action</th>
               </tr>
               </thead>
@@ -58,6 +59,7 @@
                   <td>{{ $values->jumlah_kdo }}</td>
                   <td>{{ $values->kdo_aktif }}</td>
                   <td>{{ $values->kdo_jt_lelang }}</td>
+                  <td>{{ $values->keterangan }}</td>
                   <td>
                     <a class="dropdown-toggle btn btn-block bg-gradient-primary btn-sm" data-toggle="dropdown" href="#">
                       Action <span class="caret"></span>
